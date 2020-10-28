@@ -1,0 +1,130 @@
+@extends('layouts.template')
+
+@section('styles')
+
+<link rel="stylesheet" type="text/css" href="{{ asset('public/assets/lib/datatables/datatables.net-bs4/css/dataTables.bootstrap4.css' ) }}" />
+<link rel="stylesheet" type="text/css" href="{{ asset('public/assets/lib/datatables/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css' ) }}" />
+@endsection
+
+@section('content')
+
+<div class="be-content">
+    <div class="page-head">
+        <h2 class="page-head-title">List of Police Stations</h2>
+        <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb page-head-nav">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item active">List of Police Stations </li>
+            </ol>
+        </nav>
+    </div>
+    <div class="main-content container-fluid">
+        @if ($message = Session::get('success'))
+        <div class="alert alert-contrast alert-success alert-dismissible" role="alert">
+            <div class="icon"><span class="mdi mdi-check"></span></div>
+            <div class="message">
+                <button class="close" type="button" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close" aria-hidden="true"></span></button><strong> {{ $message }} </strong>
+            </div>
+        </div>
+        @endif
+
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card card-table">
+                    <div class="card-header"> <i class="mdi mdi-format-list-bulleted"></i> List of Police Stations
+                        <div class="tools dropdown">
+                            <button class="btn btn-rounded btn-space btn-primary" data-toggle="modal" data-target="#form-bp2">
+                                Add Police Station
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped table-hover table-fw-widget" id="table1">
+                            <thead>
+                                <tr>
+                                    <th>Sr.No</th>
+                                    <th>Police Station Name</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($police_station as $link)
+                                <tr class="odd gradeX">
+                                    <td>
+                                        {{ $link->id }}
+                                    </td>
+                                    <td>
+                                        {{ $link->police_station_name }}
+                                    </td>
+                                    <td>
+                                        <div class="row">
+                                            <div class="col-xs-3">
+                                                <a href="{{ route('delete_police_station',$link->id) }}">
+                                                    <button class="btn btn-rounded btn-space btn-danger btn-xs"> delete </button>
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Head Expenses Modal -->
+<div class="modal fade colored-header colored-header-primary" id="form-bp2" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-colored">
+                <h3 class="modal-title"><i class="mdi mdi-collection-plus"></i> Add Police Station</h3>
+                <button class="close md-close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"> </span></button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('add_police_station') }}" method="post" enctype="multipart/form-data">
+                    @csrf
+                    <div class="form-group">
+                        <label>Add Police Station</label>
+                        <input type="text" name="station" class="form-control" required>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary md-close" type="button" data-dismiss="modal">Cancel</button>
+                <button class="btn btn-primary" type="submit">Proceed</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@endsection
+
+
+@section('script')
+
+<script src="{{ asset('public/assets/lib/datatables/datatables.net/js/jquery.dataTables.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-bs4/js/dataTables.bootstrap4.js') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-buttons/js/dataTables.buttons.min.js ') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-buttons/js/buttons.flash.min.js ') }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/jszip/jszip.min.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/pdfmake/pdfmake.min.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/pdfmake/vfs_fonts.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-buttons/js/buttons.colVis.min.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-buttons/js/buttons.print.min.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-buttons/js/buttons.html5.min.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-buttons-bs4/js/buttons.bootstrap4.min.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-responsive/js/dataTables.responsive.min.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/lib/datatables/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js ' ) }}" type="text/javascript"></script>
+<script src="{{ asset('public/assets/js/app-tables-datatables.js') }}" type="text/javascript"></script>
+
+<script type="text/javascript">
+    $(document).ready(function() {
+        //-initialize the javascript
+        App.dataTables();
+    });
+</script>
+
+@endsection
