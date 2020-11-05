@@ -144,27 +144,27 @@
                     <div class="col-sm-12">
                         <div class="card card-table">
                             <div class="card-body">
-                                <table class="table table-striped table-hover table-fw-widget" id="table">
+                                <table class="table table-hover " id="table">
                                     <thead>        
                                         <th class="center">Lattest Events</th>    
                                     </thead>
                                     <tbody>
-                                        {{ csrf_field() }}
-                                         <?php  $no=1; ?>
-                                         @foreach($event as $value)
+                                         {{ csrf_field() }}
+                                         
+                                         @foreach($events as $value)
                                          <tr class="event{{$value->id}}">
-                                            <td>{{ $no++ }}</td>
+    
                                             <td>{{ $value->titlw }}</td>
                                             <td>
-                                                <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-title="{{$value->titlw}}" data-description="{{$value->description}}">
+                                                <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-titlw="{{$value->titlw}}" data-description="{{$value->description}}" data-image="{{ asset('uploads/banners/' . $value->image)}}">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             </td>
-                                        </tr>
-                                        @endforeach
+                                         </tr>
+                                         @endforeach
                                     </tbody>
                                 </table>
-                                {{$event->links()}}
+                                
                             </div>
                         </div>
                     </div>
@@ -176,38 +176,32 @@
 </div>
 
 <!-- Head Expenses Modal Added by UMAR KHITAB ON 29.09.2020-->
-{{-- Modal Form Show POST --}}
+{{-- Modal Form Show event --}}
 <div id="show" class="modal fade" role="dialog">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
                     <h4 class="modal-title"></h4>
             </div>
-            <div class="modal-body">
+                <div class="modal-body">
                 <div class="form-group">
-                    <p> Title: {{$event->titlw}} </p>
-                    <b id="i"/>
-                </div>
-                <div class="form-group">
-                    <label for="">Title :</label>
                         <b id="ti"/>
                 </div>
                 <div class="form-group">
-                    <label for="">Body :</label>
-                        <b id="by"/>
+                        <b id="desc"/>
+                </div>
+                <div class="form-group">
+                        <b id="img"/>
                 </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-earning" data-dismiss="modal">
                     <span class="glyphicon glyphicon-remove"></span>Close
                 </button>
+            </div>
         </div>
     </div>
 </div>
-
-
-
 @endsection
 
 @section('script')
@@ -215,10 +209,9 @@
 // Show function
 $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
-  $('#i').text($(this).data('id'));
-  $('#ti').text($(this).data('titlw'));
-  $('#by').text($(this).data('description'));
-  $('.modal-title').text('Show Post');
+  $('#desc').text($(this).data('description'));
+ // $('#img').data('image'));
+  $('.modal-title').text($(this).data('titlw'));
   });
 </script>
 

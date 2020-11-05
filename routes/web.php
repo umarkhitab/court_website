@@ -388,7 +388,8 @@ Route::group(['prefix' => 'history'], function () {
 
     // Added by UMAR for getting clicked id item into form
     //Route::get('events/{id}','frontend\EventsControllerFrontend@show')->name('events');
-
+    Route::resource('event','EventControllerFront');
+    Route::get('event','EventControllerFront@index')->name('event');
     
     Route::resource('events', 'admin\EventsController');
     Route::resource('gallery', 'admin\GalleryController');
@@ -425,10 +426,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
-Route::group(['middleware' => ['web']], function() {
-    Route::resource('event','EventControllerFront');
-    Route::get('event','EventControllerFront')->name('event');
-    //Route::POST('addPost','EventControllerFront');
-    //Route::POST('editPost','EventControllerFront');
-    //Route::POST('deletePost','EventControllerFronts');
-  });
+
+    
+    
+ 
