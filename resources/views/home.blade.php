@@ -20,10 +20,38 @@
 
 <div class="container-fluid mt-2">
     <div class="row">
-        
-
         @include('includes.frontend_sidebar')
-
+        
+        <div class="col-lg-3">
+            <div class="jumbotron" style="padding:0.2rem 0.2rem; color:#e9ecef">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card card-table">
+                            <div class="card-body">
+                                <table class="table table-striped table-hover table-fw-widget" id="table">
+                                    <thead>        
+                                        <th class="center">Lattest Events</th>    
+                                    </thead>
+                                    <tbody>
+                                        {{ csrf_field() }}
+                                        @foreach($events as $value)
+                                        <tr class="event{{$value->id}}">
+                                             <td>{{ $value->titlw }}</td>
+                                             <td>
+                                                <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-titlw="{{$value->titlw}}" data-description="{{$value->description}}" data-image="{{$value->image}}" data-image_1="{{$value->image_1}}">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div> 
+        </div>
         <div class="col-lg-6">
             <div class="jumbotron" style="padding:1rem 1rem; background-color:#e9ecef">
                 <div class="row">
@@ -130,48 +158,12 @@
                         </div>
                     </div>
                 </div>
-     
-                <div class="col-sm-4">
-                    
-                </div> --}}
             </div>
+            
         </div>
         <!---Edited by Umar Khitab for adding Lattest Events layout--->
-
-        <div class="col-lg-3">
-             <div class="jumbotron" style="padding:0.2rem 0.2rem; color:#e9ecef">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <div class="card card-table">
-                            <div class="card-body">
-                                <table class="table table-hover " id="table">
-                                    <thead>        
-                                        <th class="center">Lattest Events</th>    
-                                    </thead>
-                                    <tbody>
-                                         {{ csrf_field() }}
-                                         
-                                         @foreach($events as $value)
-                                         <tr class="event{{$value->id}}">
-    
-                                            <td>{{ $value->titlw }}</td>
-                                            <td>
-                                                <a href="#" class="show-modal btn btn-info btn-sm" data-id="{{$value->id}}" data-titlw="{{$value->titlw}}" data-description="{{$value->description}}" data-image="{{ asset('uploads/banners/' . $value->image)}}">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                            </td>
-                                         </tr>
-                                         @endforeach
-                                    </tbody>
-                                </table>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> 
-        </div>
-
+        
+        
     </div>
 </div>
 
@@ -191,7 +183,8 @@
                         <b id="desc"/>
                 </div>
                 <div class="form-group">
-                        <b id="img"/>
+                        <img style="max-width: calc(50% - 20px)" id="img" src=""/>
+                        <img style="max-width: calc(50% - 20px)" id="img" src=""/>
                 </div>
             </div>
             <div class="modal-footer">
@@ -210,9 +203,9 @@
 $(document).on('click', '.show-modal', function() {
   $('#show').modal('show');
   $('#desc').text($(this).data('description'));
- // $('#img').data('image'));
+  $('.form-group img').prop('src', $(this).data('image'));
+  $('.form-group img').prop('src', $(this).data('image_1'));
   $('.modal-title').text($(this).data('titlw'));
   });
 </script>
-
 @endsection

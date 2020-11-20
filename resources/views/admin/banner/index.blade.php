@@ -92,6 +92,8 @@
                     <div class="form-group">
                         <label>Add Banner</label>
                         <input type="file" name="image" class="form-control" required>
+                        <input type="file" name="image_1" class="form-control" required>
+                        <input type="file" name="image_2" class="form-control" required>
                     </div>
             </div>
             <div class="modal-footer">

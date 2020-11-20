@@ -44,6 +44,8 @@
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Image</th>
+                                    <th>Image_1</th>
+                                    <th>Image_2</th>
                                     <th>File</th>
                                     <th>Action</th>
                                 </tr>
@@ -59,6 +61,12 @@
                                     </td>
                                     <td>
                                        <img src="{{ asset($event->image) }}" alt="" width="50">
+                                    </td>
+                                    <td>
+                                       <img src="{{ asset($event->image_1) }}" alt="" width="50">
+                                    </td>
+                                    <td>
+                                       <img src="{{ asset($event->image_2) }}" alt="" width="50">
                                     </td>
                                     <td>
                                        <a href="{{ asset($event->pdf_file) }}"> View File </a>
@@ -107,6 +115,14 @@
                     <div class="form-group">
                         <label>Image</label>
                         <input type="file" name="image" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Image_1</label>
+                        <input type="file" name="image_1" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Image_2</label>
+                        <input type="file" name="image_2" class="form-control" required>
                     </div>
                     <div class="form-group">
                         <label>File</label>

@@ -18,6 +18,8 @@ class CreateEventsTable extends Migration
             $table->text('titlw');
             $table->text('description');
             $table->text('image');
+            $table->text('image_1');
+            $table->text('image_2');
             $table->text('pdf_file');
             $table->timestamps();
         });

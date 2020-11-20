@@ -12,7 +12,7 @@ use App\http\Requests;
 class EventControllerFront extends Controller
 {
     public function index(){
-        //$event = Event::paginate(4);
+        
         return view('home');
       }
 }

@@ -38,11 +38,15 @@ class BannersController extends Controller
     public function store(Request $request)
     {
         $imageName = time() . '.' . $request->image->extension();
+        $imageName_1 = time() . '.' . $request->image->extension();
+        $imageName_2 = time() . '.' . $request->image->extension();
 
-        $request->image->move(public_path('uploads/banners'), $imageName);
+        $request->image->move(public_path('uploads/banners'), $imageName, $imageName_1, $imageName_2);
 
         DB::table('banner')->insert([
             'banner' => 'uploads/banners/' . $imageName,
+            'banner' => 'uploads/banners/' . $imageName_1,
+            'banner' => 'uploads/banners/' . $imageName_2,
             'created_at' => date('Y-m-d H:i:s'),
             'updated_at' => date('Y-m-d H:i:s'),
         ]);

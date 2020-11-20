@@ -38,8 +38,12 @@ class EventsController extends Controller
     public function store(Request $request)
     {
         $imageName = time() . '.' . $request->image->extension();
+        $imageName_1 = time() . '.' . $request->image_1->extension();
+        $imageName_2 = time() . '.' . $request->image_2->extension();
 
         $request->image->move(public_path('uploads/banners'), $imageName);
+        $request->image_1->move(public_path('uploads/banners'), $imageName_1);
+        $request->image_2->move(public_path('uploads/banners'), $imageName_2);
 
         $file = time() . '.' . $request->file->extension();
 
@@ -49,6 +53,8 @@ class EventsController extends Controller
             'titlw' => $request->title,
             'description' => $request->description,
             'image' => 'public/uploads/banners/' . $imageName,
+            'image_1' => 'public/uploads/banners/' . $imageName_1,
+            'image_2' => 'public/uploads/banners/' . $imageName_2,
             'pdf_file' => 'public/uploads/banners/' . $file,
            
         ]);
